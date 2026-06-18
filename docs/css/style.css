@@ -631,10 +631,10 @@ button, input, textarea, select {
 }
 
 .admin-tech-item {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
 }
 
 .admin-tech-select {
@@ -659,6 +659,7 @@ button, input, textarea, select {
   border-radius: 999px;
   cursor: pointer;
   margin-right: 2px;
+  align-self: flex-end;
 }
 
 .admin-remove-btn:hover {
