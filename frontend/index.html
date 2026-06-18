@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WorldIT | Portal de Suporte</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <section id="authScreen" class="screen">
+    <div class="auth-card">
+      <div class="auth-left">
+        <div class="brand">
+          <div class="brand-mark">
+            <span class="brand-logo" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+            </span>
+            <div>
+              <strong>WorldIT</strong>
+              <span>Soluções em Tecnologia</span>
+            </div>
+          </div>
+          <h1>Portal de Suporte</h1>
+          <p>Abra, acompanhe e resolva chamados em uma interface inspirada na identidade da WorldIT: sólida, limpa e com foco em operação.</p>
+        </div>
+        <button class="ghost-btn" id="openRegisterBtn" type="button">Criar uma conta</button>
+      </div>
+
+      <div class="auth-right">
+        <div class="form-shell">
+          <div class="role-switch">
+            <button class="role-tab active" id="companyRoleBtn" type="button">Área da empresa</button>
+            <button class="role-tab" id="technicianRoleBtn" type="button">Painel do técnico</button>
+            <button class="role-tab" id="adminRoleBtn" type="button">Admin WorldIT</button>
+          </div>
+          <div class="tabs">
+            <button class="tab active" id="loginTab" type="button">Login</button>
+            <button class="tab" id="registerTab" type="button">Cadastro</button>
+          </div>
+
+          <form class="auth-form" id="loginForm">
+            <div class="field">
+              <label for="loginEmail">E-mail</label>
+              <input id="loginEmail" type="email" placeholder="voce@empresa.com" required />
+            </div>
+            <div class="field">
+              <label for="loginPassword">Senha</label>
+              <input id="loginPassword" type="password" placeholder="Digite sua senha" required />
+            </div>
+            <label class="check-row">
+              <input type="checkbox" id="keepLogged" />
+              <span>Manter conectado</span>
+            </label>
+            <div class="actions-row">
+              <button class="primary-btn" type="submit">Entrar</button>
+              <button class="link-btn" id="forgotLink" type="button">Esqueci minha senha</button>
+            </div>
+          </form>
+
+          <form class="auth-form hidden" id="registerForm">
+            <div class="field-grid">
+              <div class="field">
+                <label for="firstName">Nome</label>
+                <input id="firstName" type="text" placeholder="Nome" />
+              </div>
+              <div class="field">
+                <label for="lastName">Sobrenome</label>
+                <input id="lastName" type="text" placeholder="Sobrenome" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="registerEmail">E-mail</label>
+              <input id="registerEmail" type="email" placeholder="voce@empresa.com" />
+            </div>
+            <div class="field-grid">
+              <div class="field">
+                <label for="registerPassword">Senha</label>
+                <input id="registerPassword" type="password" placeholder="Crie uma senha" />
+              </div>
+              <div class="field">
+                <label for="registerPasswordRepeat">Repita sua senha</label>
+                <input id="registerPasswordRepeat" type="password" placeholder="Repita a senha" />
+              </div>
+            </div>
+            <div class="actions-row">
+              <button class="primary-btn" type="submit">Registrar</button>
+              <button class="ghost-btn secondary" id="backToLoginBtn" type="button">Já tenho conta</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="appScreen" class="app hidden">
+    <header class="topbar">
+      <div class="topbar-title">
+        <div class="topbar-logo-lockup">
+          <span class="topbar-logo-mark" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </span>
+          <div class="topbar-logo-text">
+            <strong>WorldIT</strong>
+            <small>Soluções em Tecnologia</small>
+          </div>
+        </div>
+        <span class="topbar-context" id="ticketTitleHeader">Configuração de impressora</span>
+      </div>
+      <div class="user-area">
+        <div class="avatar" id="userAvatar">T</div>
+        <div id="userNameLabel">Teste</div>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="sidebar">
+        <div class="sidebar-head">
+          <span>Meus chamados</span>
+          <span id="ticketCount">0</span>
+        </div>
+        <div class="ticket-list" id="ticketList"></div>
+        <button class="new-ticket-btn" id="newTicketBtn" type="button"><strong>+</strong> Criar chamado</button>
+      </aside>
+
+      <section class="main-panel">
+        <div class="composer">
+          <div class="composer-brand">
+            <span class="composer-brand-mark" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+            </span>
+            <div>
+              <strong>WorldIT</strong>
+              <span>Soluções em Tecnologia</span>
+            </div>
+          </div>
+          <div class="breadcrumb">
+            <span class="step done">1</span><span>Introdução</span>
+            <span class="step active">2</span><span>Formulário do Chamado</span>
+            <span class="step">3</span><span>Informação Extra</span>
+          </div>
+          <h2 class="section-title">Por favor, descreva seu problema</h2>
+
+          <form class="composer-form" id="ticketForm">
+            <div class="field-grid">
+              <div class="field">
+                <label for="ticketSubject">Assunto do chamado</label>
+                <input id="ticketSubject" type="text" placeholder="Ex.: Configuração de impressora" required />
+              </div>
+              <div class="field">
+                <label for="ticketCategory">Categoria</label>
+                <select id="ticketCategory">
+                  <option>Suporte técnico</option>
+                  <option>Rede</option>
+                  <option>Impressora</option>
+                  <option>Sistema</option>
+                  <option>Outros</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field-grid">
+              <div class="field">
+                <label for="ticketPriority">Prioridade</label>
+                <select id="ticketPriority">
+                  <option>Baixa</option>
+                  <option selected>Normal</option>
+                  <option>Alta</option>
+                  <option>Urgente</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="ticketCompany">Empresa</label>
+                <input id="ticketCompany" type="text" placeholder="Nome da empresa" />
+              </div>
+            </div>
+
+            <div class="field-grid">
+              <div class="field">
+                <label for="ticketRequester">Solicitante</label>
+                <input id="ticketRequester" type="text" placeholder="Nome de quem abriu" />
+              </div>
+              <div class="field">
+                <label for="ticketEmail">E-mail</label>
+                <input id="ticketEmail" type="email" placeholder="contato@empresa.com" />
+              </div>
+            </div>
+
+            <div class="field-grid">
+              <div class="field">
+                <label for="ticketPhone">WhatsApp / Telefone</label>
+                <input id="ticketPhone" type="text" placeholder="(00) 00000-0000" />
+              </div>
+              <div class="field">
+                <label for="ticketStatusSelect">Status</label>
+                <select id="ticketStatusSelect">
+                  <option>Aberto</option>
+                  <option>Em andamento</option>
+                  <option>Aguardando cliente</option>
+                  <option>Resolvido</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="ticketDescription">Descrição</label>
+              <textarea id="ticketDescription" placeholder="Explique o problema com o máximo de detalhes possível" required></textarea>
+            </div>
+
+            <div class="composer-actions">
+              <button class="primary-btn" type="submit">Abrir chamado</button>
+              <button class="logout-btn" id="logoutBtn" type="button">Sair</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="message-box" id="messageBox"></div>
+        <form class="chat-compose" id="companyMessageForm">
+          <input id="companyMessageInput" type="text" placeholder="Digite uma mensagem para o técnico" maxlength="800" />
+          <button class="primary-btn" type="submit">Enviar</button>
+        </form>
+      </section>
+
+      <aside class="info-panel">
+        <div class="status-box">
+          <div class="status-label">Status do chamado</div>
+          <div class="status-pill" id="dashboardTicketStatus">Aberto</div>
+        </div>
+        <div class="details-list" id="detailsList"></div>
+      </aside>
+    </main>
+  </section>
+
+  <section id="techScreen" class="app hidden technician-screen">
+    <header class="topbar tech-topbar">
+      <div class="topbar-title">
+        <div class="topbar-logo-lockup">
+          <span class="topbar-logo-mark" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </span>
+          <div class="topbar-logo-text">
+            <strong>WorldIT</strong>
+            <small>Soluções em Tecnologia</small>
+          </div>
+        </div>
+        <span class="topbar-context">painel do técnico</span>
+      </div>
+      <div class="user-area">
+        <div class="avatar" id="techUserAvatar">P</div>
+        <div id="techUserNameLabel">Paulo Técnico</div>
+        <button class="logout-btn tech-logout-btn" id="techLogoutBtn" type="button">Sair</button>
+      </div>
+    </header>
+
+    <main class="workspace tech-workspace">
+      <aside class="sidebar tech-sidebar">
+        <div class="sidebar-head">
+          <span>Fila de atendimento</span>
+          <span id="techTicketCount">0</span>
+        </div>
+
+        <div class="tech-stats">
+          <div class="stat-card">
+            <span>Abertos</span>
+            <strong id="techOpenCount">0</strong>
+          </div>
+          <div class="stat-card">
+            <span>Em andamento</span>
+            <strong id="techProgressCount">0</strong>
+          </div>
+          <div class="stat-card">
+            <span>Resolvidos</span>
+            <strong id="techClosedCount">0</strong>
+          </div>
+        </div>
+
+        <div class="ticket-list tech-ticket-list" id="techTicketList"></div>
+        <div class="sidebar-subhead">
+          <span>Histórico finalizado</span>
+          <span id="techResolvedTicketCount">0</span>
+        </div>
+        <div class="ticket-list history-ticket-list" id="techResolvedTicketList"></div>
+      </aside>
+
+      <section class="main-panel tech-main-panel">
+        <div class="composer">
+          <div class="composer-brand">
+            <span class="composer-brand-mark" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+            </span>
+            <div>
+              <strong>WorldIT</strong>
+              <span>Soluções em Tecnologia</span>
+            </div>
+          </div>
+          <h2 class="section-title" id="techTicketTitleHeader">Selecione um chamado</h2>
+          <p class="tech-summary" id="techTicketSummary">Escolha um chamado na fila para atualizar o status, orientar o cliente e registrar o atendimento.</p>
+
+          <div class="composer-actions tech-actions">
+            <button class="primary-btn" id="techOpenBtn" type="button">Aberto</button>
+            <button class="primary-btn" id="techProgressBtn" type="button">Em andamento</button>
+            <button class="primary-btn" id="techWaitingBtn" type="button">Aguardando cliente</button>
+            <button class="primary-btn" id="techClosedBtn" type="button">Resolvido</button>
+          </div>
+        </div>
+
+        <div class="message-box" id="techMessageBox"></div>
+        <form class="chat-compose" id="techMessageForm">
+          <input id="techMessageInput" type="text" placeholder="Responder cliente..." maxlength="800" />
+          <button class="primary-btn" type="submit">Enviar</button>
+        </form>
+      </section>
+
+      <aside class="info-panel tech-info-panel">
+        <div class="status-box">
+          <div class="status-label">Status atual</div>
+          <div class="status-pill" id="techTicketStatus">Aberto</div>
+        </div>
+        <div class="details-list" id="techDetailsList"></div>
+      </aside>
+    </main>
+  </section>
+
+  <section id="adminScreen" class="app hidden admin-screen">
+    <header class="topbar tech-topbar">
+      <div class="topbar-title">
+        <div class="topbar-logo-lockup">
+          <span class="topbar-logo-mark" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </span>
+          <div class="topbar-logo-text">
+            <strong>WorldIT</strong>
+            <small>Soluções em Tecnologia</small>
+          </div>
+        </div>
+        <span class="topbar-context">administração de técnicos</span>
+      </div>
+      <div class="user-area">
+        <div class="avatar" id="adminUserAvatar">W</div>
+        <div id="adminUserNameLabel">WorldIT Admin</div>
+        <button class="logout-btn tech-logout-btn" id="adminLogoutBtn" type="button">Sair</button>
+      </div>
+    </header>
+
+    <main class="workspace admin-workspace">
+      <aside class="sidebar admin-sidebar">
+        <div class="sidebar-head">
+          <span>Técnicos</span>
+          <span id="adminTechnicianCount">0</span>
+        </div>
+        <div class="ticket-list admin-ticket-list" id="adminTechnicianList"></div>
+      </aside>
+
+      <section class="main-panel admin-main-panel">
+        <div class="composer">
+          <div class="composer-brand">
+            <span class="composer-brand-mark" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+            </span>
+            <div>
+              <strong>WorldIT Admin</strong>
+              <span>Cadastro de técnicos</span>
+            </div>
+          </div>
+          <h2 class="section-title" id="adminTitle">Novo técnico</h2>
+          <p class="tech-summary" id="adminSubtitle">Crie logins individuais para a equipe WorldIT e entregue e-mail e senha para cada novo acesso.</p>
+
+          <form class="composer-form admin-form" id="adminTechnicianForm">
+            <div class="field-grid">
+              <div class="field">
+                <label for="adminFirstName">Nome</label>
+                <input id="adminFirstName" type="text" placeholder="Nome do técnico" required />
+              </div>
+              <div class="field">
+                <label for="adminLastName">Sobrenome</label>
+                <input id="adminLastName" type="text" placeholder="Sobrenome" required />
+              </div>
+            </div>
+            <div class="field">
+              <label for="adminEmail">E-mail</label>
+              <input id="adminEmail" type="email" placeholder="tecnico@worldit.com" required />
+            </div>
+            <div class="field">
+              <label for="adminPassword">Senha</label>
+              <input id="adminPassword" type="text" placeholder="Senha forte para o técnico" required />
+            </div>
+            <div class="composer-actions tech-actions">
+              <button class="primary-btn" type="submit">Criar técnico</button>
+            </div>
+          </form>
+          <p class="demo-note" id="adminPasswordHint">A senha será criada por você e repassada ao técnico.</p>
+        </div>
+
+        <div class="message-box" id="adminMessageBox"></div>
+      </section>
+
+      <aside class="info-panel admin-info-panel">
+        <div class="status-box">
+          <div class="status-label">Visão geral</div>
+          <div class="status-pill" id="adminStatusPill">Gerenciamento</div>
+        </div>
+        <div class="details-list" id="adminDetailsList"></div>
+      </aside>
+    </main>
+  </section>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>
