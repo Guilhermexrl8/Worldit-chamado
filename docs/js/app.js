@@ -29,6 +29,7 @@ const companyRefs = {
   ticketStatus: document.getElementById('dashboardTicketStatus'),
   newTicketBtn: document.getElementById('newTicketBtn'),
   logoutBtn: document.getElementById('logoutBtn'),
+  topLogoutBtn: document.getElementById('companyTopLogoutBtn'),
   ticketStatusSelect: document.getElementById('ticketStatusSelect'),
   messageForm: document.getElementById('companyMessageForm'),
   messageInput: document.getElementById('companyMessageInput')
@@ -636,6 +637,15 @@ companyRefs.logoutBtn.addEventListener('click', () => {
   localStorage.removeItem('support_user');
   showAuth('login');
 });
+
+if (companyRefs.topLogoutBtn) {
+  companyRefs.topLogoutBtn.addEventListener('click', () => {
+    state.currentUser = null;
+    state.activeRole = state.authRole;
+    localStorage.removeItem('support_user');
+    showAuth('login');
+  });
+}
 
 techRefs.techLogoutBtn.addEventListener('click', () => {
   state.currentUser = null;
