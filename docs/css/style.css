@@ -129,6 +129,25 @@ button, input, textarea, select {
   overflow: hidden;
 }
 
+.topbar-logo-mark.has-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.topbar-logo-mark.has-image span {
+  display: none;
+}
+
+.company-brand-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
 .auth-left {
   background:
     linear-gradient(135deg, rgba(4, 10, 11, 0.94) 0%, rgba(8, 36, 39, 0.95) 42%, rgba(12, 88, 82, 0.96) 100%),
@@ -189,6 +208,14 @@ button, input, textarea, select {
   font-size: 22px;
   font-weight: 700;
   letter-spacing: 0.02em;
+}
+
+.auth-company-logo {
+  width: min(270px, 100%);
+  max-height: 82px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.28));
 }
 
 .brand-mark strong {
@@ -579,6 +606,40 @@ button, input, textarea, select {
   border-right: 1px solid rgba(255, 255, 255, 0.16);
 }
 
+.sidebar-tabs {
+  display: flex;
+  gap: 6px;
+  padding: 12px 12px 6px;
+}
+
+.sidebar-tab {
+  flex: 1;
+  padding: 7px 10px;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.15s, color 0.15s;
+}
+
+.sidebar-tab.active {
+  background: var(--blue);
+  color: var(--white);
+  border-color: var(--blue);
+}
+
+.sidebar-tab:hover:not(.active) {
+  background: var(--line);
+}
+
+.employee-active-pill {
+  background: #e8f5eb;
+  color: #24734d;
+}
+
 .sidebar-head {
   display: flex;
   align-items: center;
@@ -650,6 +711,63 @@ button, input, textarea, select {
   cursor: pointer;
 }
 
+.admin-company-item {
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.admin-company-main {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.admin-company-logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.88);
+  flex: 0 0 auto;
+}
+
+.admin-company-edit-btn {
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 12px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  cursor: pointer;
+  margin-right: 2px;
+  align-self: flex-end;
+}
+
+.admin-company-edit-btn:hover {
+  background: rgba(255, 191, 31, 0.24);
+  border-color: rgba(255, 235, 172, 0.75);
+}
+
+.admin-company-delete-btn {
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 12px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  cursor: pointer;
+  margin-right: 2px;
+  align-self: flex-end;
+}
+
+.admin-company-delete-btn:hover {
+  background: rgba(255, 99, 99, 0.28);
+  border-color: rgba(255, 165, 165, 0.68);
+}
+
 .admin-remove-btn {
   border: 1px solid rgba(255, 255, 255, 0.32);
   background: rgba(255, 255, 255, 0.12);
@@ -665,6 +783,13 @@ button, input, textarea, select {
 .admin-remove-btn:hover {
   background: rgba(255, 99, 99, 0.28);
   border-color: rgba(255, 165, 165, 0.68);
+}
+
+.admin-divider {
+  border: 0;
+  height: 1px;
+  background: var(--line);
+  margin: 18px 0;
 }
 
 .ticket-item.active {
@@ -1037,6 +1162,22 @@ button, input, textarea, select {
 
 .admin-form {
   margin-top: 8px;
+}
+
+.logo-lookup-btn {
+  border: 1px dashed #8fb6c6;
+  background: #f3fafc;
+  color: #1f4f67;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  justify-self: start;
+  cursor: pointer;
+}
+
+.logo-lookup-btn:hover {
+  background: #e6f3f8;
 }
 
 .admin-ticket-list .ticket-item.active {

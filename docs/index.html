@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WorldIT | Portal de Suporte</title>
+  <link rel="icon" type="image/png" href="../img/logo%20word.png" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -12,24 +13,19 @@
       <div class="auth-left">
         <div class="brand">
           <div class="brand-mark">
-            <span class="brand-logo" aria-hidden="true">
-              <span></span><span></span><span></span><span></span>
-            </span>
-            <div>
-              <strong>WorldIT</strong>
-              <span>Soluções em Tecnologia</span>
-            </div>
+            <img class="auth-company-logo" src="../img/logo%20word.png" alt="Logo WorldIT" />
           </div>
           <h1>Portal de Suporte</h1>
           <p>Abra, acompanhe e resolva chamados em uma interface inspirada na identidade da WorldIT: sólida, limpa e com foco em operação.</p>
         </div>
-        <button class="ghost-btn" id="openRegisterBtn" type="button">Criar uma conta</button>
+        <button class="ghost-btn" id="openRegisterBtn" type="button">Criar conta pessoal</button>
       </div>
 
       <div class="auth-right">
         <div class="form-shell">
           <div class="role-switch">
-            <button class="role-tab active" id="companyRoleBtn" type="button">Área da empresa</button>
+            <button class="role-tab active" id="companyRoleBtn" type="button">Acesso empresa</button>
+            <button class="role-tab" id="externalRoleBtn" type="button">Pessoa externa</button>
             <button class="role-tab" id="technicianRoleBtn" type="button">Painel do técnico</button>
             <button class="role-tab" id="adminRoleBtn" type="button">Admin WorldIT</button>
           </div>
@@ -70,7 +66,7 @@
             </div>
             <div class="field">
               <label for="registerEmail">E-mail</label>
-              <input id="registerEmail" type="email" placeholder="voce@empresa.com" />
+              <input id="registerEmail" type="email" placeholder="voce@email.com" />
             </div>
             <div class="field-grid">
               <div class="field">
@@ -97,11 +93,12 @@
       <div class="topbar-title">
         <div class="topbar-logo-lockup">
           <span class="topbar-logo-mark" aria-hidden="true">
+            <img id="companyBrandLogo" class="company-brand-img hidden" alt="Logo da empresa" />
             <span></span><span></span><span></span><span></span>
           </span>
           <div class="topbar-logo-text">
-            <strong>WorldIT</strong>
-            <small>Soluções em Tecnologia</small>
+            <strong id="companyBrandName">WorldIT</strong>
+            <small id="companyBrandSub">Soluções em Tecnologia</small>
           </div>
         </div>
         <span class="topbar-context" id="ticketTitleHeader">Configuração de impressora</span>
@@ -349,6 +346,11 @@
           <span id="adminTechnicianCount">0</span>
         </div>
         <div class="ticket-list admin-ticket-list" id="adminTechnicianList"></div>
+        <div class="sidebar-subhead">
+          <span>Empresas salvas</span>
+          <span id="adminCompanyCount">0</span>
+        </div>
+        <div class="ticket-list admin-company-list" id="adminCompanyList"></div>
       </aside>
 
       <section class="main-panel admin-main-panel">
@@ -389,6 +391,76 @@
             </div>
           </form>
           <p class="demo-note" id="adminPasswordHint">A senha será criada por você e repassada ao técnico.</p>
+
+          <hr class="admin-divider" />
+          <h2 class="section-title">Criar acesso da empresa</h2>
+          <p class="tech-summary">Crie o e-mail/senha do administrador da empresa. O acesso da empresa não é mais criado por auto cadastro.</p>
+
+          <form class="composer-form admin-form" id="adminCompanyForm">
+            <div class="field">
+              <label for="adminCompanyName">Empresa</label>
+              <input id="adminCompanyName" type="text" placeholder="Nome da empresa" required />
+            </div>
+            <div class="field">
+              <label for="adminCompanyLogoUrl">URL da logo da empresa</label>
+              <input id="adminCompanyLogoUrl" type="url" placeholder="https://site.com/logo.png" />
+              <button class="logo-lookup-btn" id="adminCompanyLogoLookupBtn" type="button">Buscar logo automaticamente</button>
+            </div>
+            <div class="field-grid">
+              <div class="field">
+                <label for="adminCompanyFirstName">Nome do responsável</label>
+                <input id="adminCompanyFirstName" type="text" placeholder="Nome" required />
+              </div>
+              <div class="field">
+                <label for="adminCompanyLastName">Sobrenome</label>
+                <input id="adminCompanyLastName" type="text" placeholder="Sobrenome" required />
+              </div>
+            </div>
+            <div class="field">
+              <label for="adminCompanyEmail">E-mail de acesso</label>
+              <input id="adminCompanyEmail" type="email" placeholder="admin@empresa.com" required />
+            </div>
+            <div class="field">
+              <label for="adminCompanyPassword">Senha inicial</label>
+              <input id="adminCompanyPassword" type="text" placeholder="Senha para o admin da empresa" required />
+            </div>
+            <div class="composer-actions tech-actions">
+              <button class="primary-btn" type="submit">Criar acesso da empresa</button>
+            </div>
+          </form>
+          <p class="demo-note" id="adminCompanyHint">Use esse formulário para gerar o login da empresa.</p>
+
+          <hr class="admin-divider" />
+          <h2 class="section-title">Editar empresa salva</h2>
+          <p class="tech-summary">Clique em Editar na empresa desejada para alterar nome, e-mail, telefone ou logo.</p>
+
+          <form class="composer-form admin-form" id="adminCompanyEditForm">
+            <input id="adminEditCompanyId" type="hidden" />
+            <div class="field">
+              <label for="adminEditCompanyName">Empresa</label>
+              <input id="adminEditCompanyName" type="text" placeholder="Nome da empresa" required />
+            </div>
+            <div class="field-grid">
+              <div class="field">
+                <label for="adminEditCompanyEmail">E-mail da empresa</label>
+                <input id="adminEditCompanyEmail" type="email" placeholder="contato@empresa.com" />
+              </div>
+              <div class="field">
+                <label for="adminEditCompanyPhone">Telefone</label>
+                <input id="adminEditCompanyPhone" type="text" placeholder="(11) 99999-9999" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="adminEditCompanyLogoUrl">URL da logo</label>
+              <input id="adminEditCompanyLogoUrl" type="url" placeholder="https://site.com/logo.png" />
+              <button class="logo-lookup-btn" id="adminEditCompanyLogoLookupBtn" type="button">Buscar logo automaticamente</button>
+            </div>
+            <div class="composer-actions tech-actions">
+              <button class="primary-btn" type="submit">Salvar alterações</button>
+              <button class="ghost-btn secondary" id="adminEditCompanyCancelBtn" type="button">Cancelar</button>
+            </div>
+          </form>
+          <p class="demo-note" id="adminCompanyEditHint">Nenhuma empresa selecionada para edição.</p>
         </div>
 
         <div class="message-box" id="adminMessageBox"></div>
@@ -400,6 +472,145 @@
           <div class="status-pill" id="adminStatusPill">Gerenciamento</div>
         </div>
         <div class="details-list" id="adminDetailsList"></div>
+      </aside>
+    </main>
+  </section>
+
+  <!-- ═══ Company Admin Screen ═══════════════════════════════════════════ -->
+  <section id="companyAdminScreen" class="app hidden">
+    <header class="topbar tech-topbar">
+      <div class="topbar-title">
+        <div class="topbar-logo-lockup">
+          <span class="topbar-logo-mark" aria-hidden="true">
+            <img id="caBrandLogo" class="company-brand-img hidden" alt="Logo da empresa" />
+            <span></span><span></span><span></span><span></span>
+          </span>
+          <div class="topbar-logo-text">
+            <strong id="caBrandName">WorldIT</strong>
+            <small id="caBrandSub">Soluções em Tecnologia</small>
+          </div>
+        </div>
+        <span class="topbar-context" id="caCompanyName">painel da empresa</span>
+      </div>
+      <div class="user-area">
+        <div class="avatar" id="caUserAvatar">A</div>
+        <div id="caUserNameLabel">Admin da empresa</div>
+        <button class="logout-btn tech-logout-btn" id="caLogoutBtn" type="button">Sair</button>
+      </div>
+    </header>
+
+    <main class="workspace tech-workspace">
+      <aside class="sidebar tech-sidebar">
+        <div class="sidebar-tabs">
+          <button id="caTabTickets"   class="sidebar-tab active" type="button">Chamados</button>
+          <button id="caTabEmployees" class="sidebar-tab"        type="button">Funcionários</button>
+        </div>
+
+        <div id="caTicketsSidebar">
+          <div class="sidebar-head">
+            <span>Chamados da empresa</span>
+            <span id="caTicketCount">0</span>
+          </div>
+          <div class="ticket-list" id="caTicketList"></div>
+          <div class="sidebar-subhead">
+            <span>Histórico finalizado</span>
+            <span id="caResolvedTicketCount">0</span>
+          </div>
+          <div class="ticket-list history-ticket-list" id="caResolvedTicketList"></div>
+        </div>
+
+        <div id="caEmployeesSidebar" class="hidden">
+          <div class="sidebar-head">
+            <span>Funcionários</span>
+            <span id="caEmployeeCount">0</span>
+          </div>
+          <div class="ticket-list" id="caEmployeeList"></div>
+        </div>
+      </aside>
+
+      <section class="main-panel tech-main-panel">
+        <!-- Tickets tab -->
+        <div id="caTicketsMain">
+          <div class="composer">
+            <div class="composer-brand">
+              <span class="composer-brand-mark" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+              </span>
+              <div>
+                <strong>WorldIT</strong>
+                <span>Painel da empresa</span>
+              </div>
+            </div>
+            <h2 class="section-title" id="caTicketTitleHeader">Selecione um chamado</h2>
+            <p class="tech-summary" id="caTicketSummary">Acompanhe os chamados abertos pelos funcionários da sua empresa.</p>
+          </div>
+          <div class="message-box" id="caMessageBox"></div>
+          <form class="chat-compose" id="caMessageForm">
+            <input id="caMessageInput" type="text" placeholder="Escrever mensagem ao técnico..." maxlength="800" />
+            <button class="primary-btn" type="submit">Enviar</button>
+          </form>
+        </div>
+
+        <!-- Employees tab -->
+        <div id="caEmployeesMain" class="hidden">
+          <div class="composer">
+            <div class="composer-brand">
+              <span class="composer-brand-mark" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+              </span>
+              <div>
+                <strong>WorldIT</strong>
+                <span>Gestão de funcionários</span>
+              </div>
+            </div>
+            <h2 class="section-title">Cadastrar funcionário</h2>
+            <p class="tech-summary">Crie logins individuais para os funcionários da sua empresa.</p>
+            <form class="composer-form admin-form" id="caEmployeeForm">
+              <div class="field-grid">
+                <div class="field">
+                  <label for="caEmpFirstName">Nome</label>
+                  <input id="caEmpFirstName" type="text" placeholder="Nome do funcionário" required />
+                </div>
+                <div class="field">
+                  <label for="caEmpLastName">Sobrenome</label>
+                  <input id="caEmpLastName" type="text" placeholder="Sobrenome" required />
+                </div>
+              </div>
+              <div class="field">
+                <label for="caEmpEmail">E-mail</label>
+                <input id="caEmpEmail" type="email" placeholder="funcionario@empresa.com" required />
+              </div>
+              <div class="field">
+                <label for="caEmpPassword">Senha inicial</label>
+                <input id="caEmpPassword" type="text" placeholder="Senha para o funcionário" required />
+              </div>
+              <div class="composer-actions tech-actions">
+                <button class="primary-btn" type="submit">Cadastrar funcionário</button>
+              </div>
+            </form>
+            <p class="demo-note" id="caEmpHint">Cadastre funcionários e entregue o acesso com e-mail e senha.</p>
+          </div>
+          <div class="message-box" id="caEmpMessageBox"></div>
+        </div>
+      </section>
+
+      <aside class="info-panel tech-info-panel">
+        <!-- Ticket info -->
+        <div id="caTicketInfo">
+          <div class="status-box">
+            <div class="status-label">Status do chamado</div>
+            <div class="status-pill" id="caTicketStatus">Aberto</div>
+          </div>
+          <div class="details-list" id="caDetailsList"></div>
+        </div>
+        <!-- Employee info -->
+        <div id="caEmployeeInfo" class="hidden">
+          <div class="status-box">
+            <div class="status-label">Funcionário</div>
+            <div class="status-pill employee-active-pill">Ativo</div>
+          </div>
+          <div class="details-list" id="caEmployeeDetailsList"></div>
+        </div>
       </aside>
     </main>
   </section>
