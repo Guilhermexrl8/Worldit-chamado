@@ -1,0 +1,22 @@
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+
+# Local DB/runtime artifacts
+.mysql-data/
+data/*.db
+data/*.db-shm
+data/*.db-wal
+
+# Logs
+*.log
+logs/
+
+# OS/editor artifacts
+.DS_Store
+Thumbs.db
+.vscode/

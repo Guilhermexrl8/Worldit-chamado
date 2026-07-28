@@ -4,10 +4,15 @@
   "private": true,
   "type": "commonjs",
   "dependencies": {
+    "dotenv": "^17.4.2",
+    "mysql2": "^3.11.3",
     "nodemailer": "^6.9.16"
   },
   "scripts": {
     "start": "node backend/server.js",
+    "reset:admin": "node backend/reset-to-admin.js",
+    "prestart:clean": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"$p=(Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty OwningProcess); if ($p) { Stop-Process -Id $p -Force }\"",
+    "start:clean": "npm run prestart:clean ; npm run start",
     "tunnel": "localtunnel --port 3000",
     "start:public": "concurrently -k -n APP,TUNNEL -c green,cyan \"node backend/server.js\" \"npm run tunnel\""
   },

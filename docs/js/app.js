@@ -1,5 +1,39 @@
 const isGithubPages = /\.github\.io$/i.test(window.location.hostname);
-const apiBase = window.location.protocol === 'file:' ? 'http://localhost:3000/api' : '/api';
+function normalizeApiBase(value) {
+  const raw = String(value || '').trim();
+  if (!raw) return '';
+
+  let normalized = raw.replace(/\/+$/, '');
+  if (!/\/api$/i.test(normalized)) {
+    normalized = `${normalized}/api`;
+  }
+  return normalized;
+}
+
+function resolveApiBase() {
+  const storageKey = 'support_api_base';
+
+  const queryOverride = normalizeApiBase(new URLSearchParams(window.location.search).get('apiBase'));
+  if (queryOverride) {
+    try { window.localStorage.setItem(storageKey, queryOverride); } catch (_error) { /* ignore */ }
+    return queryOverride;
+  }
+
+  const storedOverride = normalizeApiBase(window.localStorage?.getItem(storageKey));
+  if (storedOverride) return storedOverride;
+
+  const globalOverride = normalizeApiBase(window.SUPPORT_API_BASE);
+  if (globalOverride) {
+    try { window.localStorage.setItem(storageKey, globalOverride); } catch (_error) { /* ignore */ }
+    return globalOverride;
+  }
+
+  const path = String(window.location.pathname || '');
+  if (path.startsWith('/chamado/')) return '/chamado/api';
+  return '/api';
+}
+
+const apiBase = resolveApiBase();
 const githubPagesMessage = 'Esta versao no GitHub Pages e apenas uma vitrine visual. Para usar login, cadastro e chamados, rode o backend localmente com npm run start.';
 
 const authScreen = document.getElementById('authScreen');
@@ -143,7 +177,18 @@ async function api(path, options = {}) {
     ...options
   });
 
-  const payload = await response.json();
+  const contentType = String(response.headers.get('content-type') || '').toLowerCase();
+  let payload = null;
+
+  if (contentType.includes('application/json')) {
+    payload = await response.json();
+  } else {
+    await response.text();
+    throw new Error(
+      `A API retornou HTML em vez de JSON. Verifique rota/proxy do Nginx para ${apiBase}${path}.`
+    );
+  }
+
   if (!response.ok) {
     throw new Error(payload.error || 'Erro ao processar a requisição.');
   }
