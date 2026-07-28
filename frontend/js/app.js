@@ -11,6 +11,7 @@ function normalizeApiBase(value) {
 
 function resolveApiBase() {
   const storageKey = 'support_api_base';
+  const legacyPathBase = '/chamado/api';
 
   const queryOverride = normalizeApiBase(new URLSearchParams(window.location.search).get('apiBase'));
   if (queryOverride) {
@@ -19,7 +20,13 @@ function resolveApiBase() {
   }
 
   const storedOverride = normalizeApiBase(window.localStorage?.getItem(storageKey));
-  if (storedOverride) return storedOverride;
+  if (storedOverride) {
+    if (storedOverride === legacyPathBase) {
+      try { window.localStorage.removeItem(storageKey); } catch (_error) { /* ignore */ }
+    } else {
+      return storedOverride;
+    }
+  }
 
   const globalOverride = normalizeApiBase(window.SUPPORT_API_BASE);
   if (globalOverride) {
@@ -27,8 +34,6 @@ function resolveApiBase() {
     return globalOverride;
   }
 
-  const path = String(window.location.pathname || '');
-  if (path.startsWith('/chamado/')) return '/chamado/api';
   return '/api';
 }
 
